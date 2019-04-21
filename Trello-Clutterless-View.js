@@ -64,5 +64,11 @@ javascript:(function() {
 			list.style.display = '';
 		}
 	}
+	
+	/* hide Add Another Card */
+	var links = document.querySelectorAll('.open-card-composer');
+	for (link of links) {		
+		link.style.display = shouldHide ? 'none' : '';
+	}
 
 })();
