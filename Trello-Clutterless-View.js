@@ -42,5 +42,3 @@ javascript:(function() {
 		}
 	}
 })();
-
-// TODO - can we just change CSS styles?
