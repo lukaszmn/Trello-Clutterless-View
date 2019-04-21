@@ -1,8 +1,12 @@
 javascript:(function() {
+	/* check status */
+	const ATTR_NAME = 'clutterless-visible';
+	const attr = document.body.getAttribute(ATTR_NAME);
+	const shouldHide = attr == null || attr == 'false';
+	document.body.setAttribute(ATTR_NAME, shouldHide);
+
 	var elements = document.querySelectorAll('.list-card-details > .list-card-labels, .list-card-details > .badges, .list-card-details > .list-card-members, .list-card > .list-card-cover, .list-card > .list-card-stickers-area');
 	if (elements.length) {
-		const elDisplay = elements[0].style.display;
-		const shouldHide = elDisplay == undefined || elDisplay == 'block' || elDisplay == '';
 		
 		/* remove labels, badges, members, images, stickers */
 		for (elem of elements) {
@@ -41,4 +45,24 @@ javascript:(function() {
 			}
 		}
 	}
+
+
+	/* hide Add Another List */
+	var newList = document.querySelector('.js-add-list');
+	if (newList) {
+		newList.style.display = shouldHide ? 'none' : '';
+	}
+
+	/* hide empty lists */
+	var lists = document.querySelectorAll('.js-list');
+	for (list of lists) {
+		if (shouldHide) {
+			var cards = list.querySelectorAll('.list-cards > .list-card:not(.hide)');
+			const hideList = (cards.length == 0);
+			list.style.display = hideList ? 'none' : '';
+		} else {
+			list.style.display = '';
+		}
+	}
+
 })();
